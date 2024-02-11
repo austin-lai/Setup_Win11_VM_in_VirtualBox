@@ -12,6 +12,11 @@ Expand-Archive -Path $archivePath -DestinationPath $extractedPath -Confirm
 # Import the virtual machine to VirtualBox
 VBoxManage import "$ovaFilePath"
 
+Start-Sleep -Seconds 2
+
+# Attach the virtual machine to grouping
+VBoxManage modifyvm $vmName --groups "/Windows_VM/Win11_Normal_Use"
+
 # Enable hot-pluggable hard disk
 VBoxManage storageattach "WinDev2401Eval" --storagectl "SATA Controller" --device 0 --port 0 --type hdd --hotpluggable on
 
